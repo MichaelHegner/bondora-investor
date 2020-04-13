@@ -18,7 +18,7 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 public class BondoraAuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/login**", "/error**").permitAll()
+		http.authorizeRequests().antMatchers("/", "/login**", "/error**", "/callback**").permitAll()
 		        .anyRequest().authenticated()
 		        .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
 		        .and().oauth2Login();
