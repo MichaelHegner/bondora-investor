@@ -10,6 +10,8 @@ public class CallbackController {
 
 	@GetMapping("/callback")
 	public ModelAndView get(String code, OAuth2AuthenticationToken token) {
+		System.out.println("TOKEN: " + token);
+		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
 		mav.addObject("principal", token);
