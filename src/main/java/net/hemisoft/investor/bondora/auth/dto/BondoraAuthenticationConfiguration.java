@@ -45,7 +45,7 @@ public class BondoraAuthenticationConfiguration extends WebSecurityConfigurerAda
 				.tokenUri("https://api.bondora.com/oauth/access_token")
 				.redirectUriTemplate("https://bondora-investor.herokuapp.com/callback")
 //				.userInfoUri("https://api.bondora.com/user")
-				.clientAuthenticationMethod(ClientAuthenticationMethod.POST)
+				.clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
 				.scope("BidsRead")
 				.clientName("Bondora")
 				.build();
