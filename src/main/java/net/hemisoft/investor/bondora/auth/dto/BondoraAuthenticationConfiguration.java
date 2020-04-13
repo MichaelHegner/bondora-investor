@@ -21,7 +21,9 @@ public class BondoraAuthenticationConfiguration extends WebSecurityConfigurerAda
 		http.authorizeRequests().antMatchers("/", "/login**", "/error**", "/callback**", "/user**").permitAll()
 		        .anyRequest().authenticated()
 		        .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
-		        .and().oauth2Login();
+		        .and().oauth2Login()
+		        .defaultSuccessUrl("/account")
+		        .failureUrl("/error");
 	}
 
 	@Bean
