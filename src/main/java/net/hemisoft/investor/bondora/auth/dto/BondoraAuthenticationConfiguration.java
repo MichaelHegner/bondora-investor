@@ -42,7 +42,7 @@ public class BondoraAuthenticationConfiguration extends WebSecurityConfigurerAda
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 				.authorizationUri("https://www.bondora.com/oauth/authorize")
 				.tokenUri("https://api.bondora.com/oauth/access_token")
-//				.redirectUriTemplate("https://bondora-investor.herokuapp.com/callback")
+				.redirectUriTemplate("https://bondora-investor.herokuapp.com/callback")
 //				.userInfoUri("https://api.bondora.com/user")
 				.scope("BidsRead")
 				.clientName("Bondora")
