@@ -13,6 +13,6 @@ public class AccessTokenService {
 	AccessToken accessToken;
 	
 	public boolean hasAccessToken() {
-		return accessToken.hasAccessToken();
+		return null != accessToken && accessToken.hasAccessToken();
 	}
 }
