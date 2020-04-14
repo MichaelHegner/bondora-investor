@@ -31,7 +31,7 @@ public class CallbackController {
 
 	@GetMapping("/callback")
 	public ModelAndView get(String code, AccessToken accessToken) {
-		BeanUtils.copyProperties(getNewAccessToken(code), accessToken);
+		if (!accessToken.hasAccessToken()) BeanUtils.copyProperties(getNewAccessToken(code), accessToken);
 		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
