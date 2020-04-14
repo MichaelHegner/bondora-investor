@@ -33,13 +33,6 @@ public class CallbackController {
 	public ModelAndView get(String code) {
 		accessTokenService.setAccessToken(getNewAccessToken(code));
 		return new ModelAndView(new RedirectView("/account"));
-//		
-//		ModelAndView mav = new ModelAndView("callback");
-//		mav.addObject("code", code);
-//		mav.addObject("client_id", clientId);
-//		mav.addObject("client_secret", clientSecret);
-//		mav.addObject("response", accessTokenService.getAccessToken());
-//		return mav;
 	}
 	
 	
