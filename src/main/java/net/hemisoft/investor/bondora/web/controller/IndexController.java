@@ -9,6 +9,6 @@ public class IndexController {
 
 	@GetMapping
 	public RedirectView index() {
-		return new RedirectView("login");
+		return new RedirectView("/login");
 	}
 }
