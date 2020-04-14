@@ -9,7 +9,7 @@ public class BondoraAuthenticationConfiguration extends WebSecurityConfigurerAda
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/login**", "/error**", "/callback**", "/user**").permitAll()
+		http.authorizeRequests().antMatchers("/", "/login**", "/login/**", "/error**", "/callback**", "/user**").permitAll()
 		        .anyRequest().authenticated()
 		        .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
 		        .and().oauth2Login()
