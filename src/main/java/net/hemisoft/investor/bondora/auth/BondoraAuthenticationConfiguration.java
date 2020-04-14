@@ -22,7 +22,7 @@ public class BondoraAuthenticationConfiguration extends WebSecurityConfigurerAda
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests( 
-					a -> a.antMatchers("/", "/error**", "/webjars/**")
+					a -> a.antMatchers("/", "/error**", "/webjars/**", "/favicon.ico")
 						.permitAll()
 						.anyRequest()
 						.authenticated()
