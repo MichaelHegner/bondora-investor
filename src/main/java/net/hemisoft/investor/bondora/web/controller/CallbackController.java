@@ -1,5 +1,6 @@
 package net.hemisoft.investor.bondora.web.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
@@ -30,11 +31,13 @@ public class CallbackController {
 
 	@GetMapping("/callback")
 	public ModelAndView get(String code, AccessToken accessToken) {
+		BeanUtils.copyProperties(getNewAccessToken(code), accessToken);
+		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
 		mav.addObject("client_id", clientId);
 		mav.addObject("client_secret", clientSecret);
-		mav.addObject("response", accessToken == null ? getNewAccessToken(code) : accessToken);
+		mav.addObject("response", accessToken);
 		return mav;
 	}
 	
