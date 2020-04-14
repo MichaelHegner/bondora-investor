@@ -1,9 +1,9 @@
 package net.hemisoft.investor.bondora.auth.dto;
 
+import lombok.Data;
 import lombok.ToString;
-import lombok.Value;
 
-@Value
+@Data
 @ToString
 public class AuthResponseDto {
 	String access_token;
