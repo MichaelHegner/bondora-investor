@@ -31,13 +31,13 @@ public class CallbackController {
 		parts.add("client_id", clientId);
 		parts.add("client_secret", clientSecret);
 		parts.add("code", code);
-//		parts.add("redirect_uri", "/callback");
+		parts.add("redirect_uri", "/callback");
 		
 		
 		String response = template.postForObject(tokenUri, parts, String.class);
 		
 		ModelAndView mav = new ModelAndView("callback");
-		mav.addObject("code", substring(code, 0, 5));
+		mav.addObject("code", code);
 		mav.addObject("client_id", substring(clientId, 0, 5));
 		mav.addObject("client_secret", substring(clientSecret, 0, 5));
 		mav.addObject("tokenUri", substring(tokenUri, 0, 5));
