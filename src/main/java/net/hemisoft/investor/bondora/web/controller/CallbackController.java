@@ -35,7 +35,8 @@ public class CallbackController {
 		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
-		mav.addObject("principal", response);
+		mav.addObject("response", response);
+		mav.addObject("token", token);
 		return mav;
 	}
 	
