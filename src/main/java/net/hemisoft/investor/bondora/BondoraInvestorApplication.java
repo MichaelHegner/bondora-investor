@@ -31,7 +31,7 @@ public class BondoraInvestorApplication {
 		return new RestTemplateBuilder()
 				.interceptors(
 				 (ClientHttpRequestInterceptor) (httpRequest, bytes, execution) -> {
-					 OAuth2AuthenticationToken token = OAuth2AuthenticationToken.class.cast(SecurityContextHolder.getContext().getAuthentication());
+					 OAuth2AuthenticationToken token = AnonymousAuthenticationToken.class.cast(SecurityContextHolder.getContext().getAuthentication());
 					 OAuth2AuthorizedClient client = clientService.loadAuthorizedClient(token.getAuthorizedClientRegistrationId(), token.getName());
 					 httpRequest.getHeaders().add(HttpHeaders.AUTHORIZATION, "Bearer" + client.getAccessToken().getTokenValue());
 					 return execution.execute(httpRequest, bytes);

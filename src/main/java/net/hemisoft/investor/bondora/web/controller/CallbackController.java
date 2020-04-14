@@ -3,7 +3,7 @@ package net.hemisoft.investor.bondora.web.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -24,7 +24,7 @@ public class CallbackController {
 	String tokenUri;
 	
 	@Autowired
-	ClientRegistrationRepository repository;
+	OAuth2AuthorizedClientService clientService;
 	
 	@Autowired
 	RestTemplate template;
@@ -32,6 +32,9 @@ public class CallbackController {
 	@GetMapping("/callback")
 	public ModelAndView get(String code, AccessToken accessToken) {
 		BeanUtils.copyProperties(getNewAccessToken(code), accessToken);
+		
+		clientService.saveAuthorizedClient(authorizedClient, principal);
+		
 		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
