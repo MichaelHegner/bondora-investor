@@ -4,7 +4,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
@@ -32,7 +31,7 @@ public class CallbackController {
 	RestTemplate template;
 
 	@GetMapping("/callback")
-	public ModelAndView get(String code, AccessToken accessToken, OAuth2AuthorizedClient authorizedClient,
+	public ModelAndView get(String code, AccessToken accessToken,
             Authentication principal) {
 		if (!accessToken.hasAccessToken()) BeanUtils.copyProperties(getNewAccessToken(code), accessToken);
 		
