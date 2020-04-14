@@ -3,6 +3,7 @@ package net.hemisoft.investor.bondora.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -17,6 +18,9 @@ public class CallbackController {
 	@Value("${client-secret}") String clientSecret;
 	@Value("${spring.security.oauth2.client.provider.bondora-authz.token-uri}")
 	String tokenUri;
+	
+	@Autowired
+	ClientRegistrationRepository repository;
 	
 	
 	@Autowired
@@ -39,6 +43,7 @@ public class CallbackController {
 		mav.addObject("tokenUri", tokenUri);
 		mav.addObject("token", token);
 		mav.addObject("response", response);
+		mav.addObject("registration", repository.findByRegistrationId(code));
 		return mav;
 	}
 
