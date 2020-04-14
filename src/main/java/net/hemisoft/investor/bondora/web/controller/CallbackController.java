@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nimbusds.oauth2.sdk.AccessTokenResponse;
+
 import lombok.extern.slf4j.Slf4j;
 import net.hemisoft.investor.bondora.web.session.AccessToken;
 
@@ -42,14 +44,14 @@ public class CallbackController {
 	}
 	
 	
-	private AccessToken getNewAccessToken(String code) {
+	private AccessTokenResponse getNewAccessToken(String code) {
 		log.info("Get new access token by code: " + code);
 		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
 		parts.add("grant_type", "authorization_code");
 		parts.add("client_id", clientId);
 		parts.add("client_secret", clientSecret);
 		parts.add("code", code);
-		return template.postForObject(tokenUri, parts, AccessToken.class);
+		return template.postForObject(tokenUri, parts, AccessTokenResponse.class);
 	}
 	
 
