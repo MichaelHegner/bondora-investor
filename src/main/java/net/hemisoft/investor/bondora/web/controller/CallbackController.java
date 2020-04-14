@@ -8,6 +8,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import lombok.extern.slf4j.Slf4j;
 import net.hemisoft.investor.bondora.web.session.AccessToken;
@@ -31,13 +32,14 @@ public class CallbackController {
 	@GetMapping("/callback")
 	public ModelAndView get(String code) {
 		accessTokenService.setAccessToken(getNewAccessToken(code));
-		
-		ModelAndView mav = new ModelAndView("callback");
-		mav.addObject("code", code);
-		mav.addObject("client_id", clientId);
-		mav.addObject("client_secret", clientSecret);
-		mav.addObject("response", accessTokenService.getAccessToken());
-		return mav;
+		return new ModelAndView(new RedirectView("/account"));
+//		
+//		ModelAndView mav = new ModelAndView("callback");
+//		mav.addObject("code", code);
+//		mav.addObject("client_id", clientId);
+//		mav.addObject("client_secret", clientSecret);
+//		mav.addObject("response", accessTokenService.getAccessToken());
+//		return mav;
 	}
 	
 	
