@@ -1,10 +1,7 @@
 package net.hemisoft.investor.bondora.web.controller;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -14,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import net.hemisoft.investor.bondora.web.session.AccessToken;
+import net.hemisoft.investor.bondora.web.session.AccessTokenService;
 
 @Slf4j
 @Controller
@@ -25,22 +23,20 @@ public class CallbackController {
 	String tokenUri;
 	
 	@Autowired
-	OAuth2AuthorizedClientService clientService;
+	AccessTokenService accessTokenService;
 	
 	@Autowired
 	RestTemplate template;
 
 	@GetMapping("/callback")
-	public ModelAndView get(String code, AccessToken accessToken, Authentication principal) {
-		if (!accessToken.hasAccessToken()) BeanUtils.copyProperties(getNewAccessToken(code), accessToken);
-		
+	public ModelAndView get(String code) {
+		accessTokenService.setAccessToken(getNewAccessToken(code));
 		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
 		mav.addObject("client_id", clientId);
 		mav.addObject("client_secret", clientSecret);
-		mav.addObject("response", accessToken);
-		mav.addObject("principal", principal);
+		mav.addObject("response", accessTokenService.getAccessToken());
 		return mav;
 	}
 	

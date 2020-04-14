@@ -1,18 +1,12 @@
 package net.hemisoft.investor.bondora;
 
-import static org.springframework.web.context.WebApplicationContext.SCOPE_SESSION;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.web.client.RestTemplate;
-
-import net.hemisoft.investor.bondora.web.session.AccessToken;
 
 
 @SpringBootApplication
@@ -36,9 +30,4 @@ public class BondoraInvestorApplication {
 				.build();
 	}
 	
-	@Bean
-	@Scope(value = SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
-	public AccessToken accessToken() {
-		return new AccessToken();
-	}
 }
