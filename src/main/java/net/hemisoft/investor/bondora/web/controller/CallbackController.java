@@ -3,6 +3,8 @@ package net.hemisoft.investor.bondora.web.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
@@ -10,8 +12,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.nimbusds.oauth2.sdk.AccessTokenResponse;
 
 import lombok.extern.slf4j.Slf4j;
 import net.hemisoft.investor.bondora.web.session.AccessToken;
@@ -32,8 +32,10 @@ public class CallbackController {
 	RestTemplate template;
 
 	@GetMapping("/callback")
-	public ModelAndView get(String code, AccessToken accessToken) {
+	public ModelAndView get(String code, AccessToken accessToken, OAuth2AuthorizedClient authorizedClient,
+            Authentication principal) {
 		if (!accessToken.hasAccessToken()) BeanUtils.copyProperties(getNewAccessToken(code), accessToken);
+		
 		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
@@ -44,14 +46,14 @@ public class CallbackController {
 	}
 	
 	
-	private AccessTokenResponse getNewAccessToken(String code) {
+	private AccessToken getNewAccessToken(String code) {
 		log.info("Get new access token by code: " + code);
 		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
 		parts.add("grant_type", "authorization_code");
 		parts.add("client_id", clientId);
 		parts.add("client_secret", clientSecret);
 		parts.add("code", code);
-		return template.postForObject(tokenUri, parts, AccessTokenResponse.class);
+		return template.postForObject(tokenUri, parts, AccessToken.class);
 	}
 	
 
