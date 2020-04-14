@@ -22,9 +22,6 @@ public class CallbackController {
 
 	@GetMapping("/callback")
 	public ModelAndView get(String code, OAuth2AuthenticationToken token) {
-		System.out.println("TOKEN: " + token);
-		
-		
 		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
 		parts.add("grant_type", "authorization_code");
 		parts.add("client_id", clientId);
