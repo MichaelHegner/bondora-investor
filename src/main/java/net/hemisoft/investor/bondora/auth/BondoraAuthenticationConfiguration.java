@@ -17,20 +17,4 @@ public class BondoraAuthenticationConfiguration extends WebSecurityConfigurerAda
 		;
 	}
 
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http
-//			.authorizeRequests( 
-//					a -> a.antMatchers("/", "/error**", "/webjars/**", "/favicon.ico")
-//						.permitAll()
-//						.anyRequest()
-//						.authenticated()
-//		        )
-//			.exceptionHandling(
-//					e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-//					)
-//			.oauth2Login()
-//		;
-//	}
-
 }
