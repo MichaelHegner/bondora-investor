@@ -33,9 +33,6 @@ public class CallbackController {
 	public ModelAndView get(String code, AccessToken accessToken) {
 		BeanUtils.copyProperties(getNewAccessToken(code), accessToken);
 		
-		clientService.saveAuthorizedClient(authorizedClient, principal);
-		
-		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
 		mav.addObject("client_id", clientId);
