@@ -23,7 +23,8 @@ public class BondoraInvestorApplication {
 		return new RestTemplateBuilder()
 				.interceptors(
 				 (ClientHttpRequestInterceptor) (httpRequest, bytes, execution) -> {
-					 httpRequest.getHeaders().add(HttpHeaders.AUTHORIZATION, "Bearer" + accessTokenService.getAccessToken().getAccess_token());
+					 if(accessTokenService.hasAccessToken())
+						 httpRequest.getHeaders().add(HttpHeaders.AUTHORIZATION, "Bearer" + accessTokenService.getAccessToken().getAccess_token());
 					 return execution.execute(httpRequest, bytes);
 				 }
 				)

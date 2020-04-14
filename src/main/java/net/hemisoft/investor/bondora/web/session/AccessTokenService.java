@@ -11,4 +11,8 @@ import lombok.Setter;
 public class AccessTokenService {
 	@Getter @Setter
 	AccessToken accessToken;
+	
+	public boolean hasAccessToken() {
+		return accessToken.hasAccessToken();
+	}
 }
