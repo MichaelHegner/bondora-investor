@@ -1,7 +1,5 @@
 package net.hemisoft.investor.bondora.web.controller;
 
-import static org.thymeleaf.util.StringUtils.substring;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -36,9 +34,9 @@ public class CallbackController {
 		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
-		mav.addObject("client_id", substring(clientId, 0, 5));
-		mav.addObject("client_secret", substring(clientSecret, 0, 5));
-		mav.addObject("tokenUri", substring(tokenUri, 0, 5));
+		mav.addObject("client_id", clientId);
+		mav.addObject("client_secret", clientSecret);
+		mav.addObject("tokenUri", tokenUri);
 		mav.addObject("token", token);
 		mav.addObject("response", response);
 		return mav;
