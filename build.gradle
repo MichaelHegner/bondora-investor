@@ -26,16 +26,16 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
-	implementation 'org.springframework.boot:spring-boot-starter-integration'
+//	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+//	implementation 'org.springframework.boot:spring-boot-starter-integration'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'org.springframework.integration:spring-integration-http'
+//	implementation 'org.springframework.integration:spring-integration-http'
 	implementation 'org.webjars:jquery'
 	implementation 'org.webjars:bootstrap:4.4.1-1'
 	implementation 'org.webjars:webjars-locator-core'
 	
 	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
