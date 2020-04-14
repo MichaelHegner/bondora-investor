@@ -2,6 +2,7 @@ package net.hemisoft.investor.bondora.account;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,8 @@ public class BondoraAccountConfiguration {
 	
 	@Value("${app.bondora.url.account.balance}") String balanceUrl;
 	
+	@Autowired AccessTokenService accessTokenService;
+	
 	@Bean
 	public IntegrationFlow requestAccountFlow() {
 		 return IntegrationFlows.from(Http.inboundGateway("/account")
@@ -30,7 +33,7 @@ public class BondoraAccountConfiguration {
 	}
 	
 	@Bean
-	public IntegrationFlow bondoraAccountFlow(AccessTokenService accessTokenService) {
+	public IntegrationFlow bondoraAccountFlow() {
 		return IntegrationFlows.from("httpAccountRequest")
 				.enrichHeaders(Map.of(HttpHeaders.AUTHORIZATION, "Bearer" + accessTokenService.getAccessToken().getAccess_token()))
 				.handle(
