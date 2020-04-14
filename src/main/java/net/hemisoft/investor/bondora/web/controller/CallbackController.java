@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.hemisoft.investor.bondora.auth.dto.AuthResponseDto;
+
 @Controller
 public class CallbackController {
 	
 	@Value("${client-id}")     String clientId;
 	@Value("${client-secret}") String clientSecret;
-//	@Value("${spring.security.oauth2.client.provider.bondora-authz.token-uri}")
-//	String tokenUri;
+	@Value("${spring.security.oauth2.client.provider.bondora.token-uri}")
+	String tokenUri;
 	
 	@Autowired
 	ClientRegistrationRepository repository;
@@ -36,7 +38,7 @@ public class CallbackController {
 		parts.add("client_secret", clientSecret);
 		parts.add("code", code);
 		
-//		AuthResponseDto response = template.postForObject(tokenUri, parts, AuthResponseDto.class);
+		AuthResponseDto response = template.postForObject(tokenUri, parts, AuthResponseDto.class);
 		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
@@ -45,7 +47,7 @@ public class CallbackController {
 //		mav.addObject("tokenUri", tokenUri);
 		mav.addObject("token", token);
 		mav.addObject("principal", principal);
-//		mav.addObject("response", response);
+		mav.addObject("response", response);
 //		mav.addObject("registration", Arrays.asList(
 //				repository.findByRegistrationId(code),
 //				repository.findByRegistrationId(clientId),
