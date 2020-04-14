@@ -18,8 +18,8 @@ public class CallbackController {
 	
 	@Value("${client-id}")     String clientId;
 	@Value("${client-secret}") String clientSecret;
-	@Value("${spring.security.oauth2.client.provider.bondora-authz.token-uri}")
-	String tokenUri;
+//	@Value("${spring.security.oauth2.client.provider.bondora-authz.token-uri}")
+//	String tokenUri;
 	
 	@Autowired
 	ClientRegistrationRepository repository;
