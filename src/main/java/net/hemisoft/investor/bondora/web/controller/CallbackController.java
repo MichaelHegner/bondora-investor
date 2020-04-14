@@ -31,8 +31,7 @@ public class CallbackController {
 	RestTemplate template;
 
 	@GetMapping("/callback")
-	public ModelAndView get(String code, AccessToken accessToken,
-            Authentication principal) {
+	public ModelAndView get(String code, AccessToken accessToken, Authentication principal) {
 		if (!accessToken.hasAccessToken()) BeanUtils.copyProperties(getNewAccessToken(code), accessToken);
 		
 		
@@ -41,6 +40,7 @@ public class CallbackController {
 		mav.addObject("client_id", clientId);
 		mav.addObject("client_secret", clientSecret);
 		mav.addObject("response", accessToken);
+		mav.addObject("principal", principal);
 		return mav;
 	}
 	
