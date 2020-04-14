@@ -1,5 +1,7 @@
 package net.hemisoft.investor.bondora.web.controller;
 
+import static org.thymeleaf.util.StringUtils.substring;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -15,6 +17,8 @@ public class CallbackController {
 	
 	@Value("${client-id}")     String clientId;
 	@Value("${client-secret}") String clientSecret;
+	@Value("${spring.security.oauth2.client.provider.bondora-authz.token-uri}")
+	String tokenUri;
 	
 	
 	@Autowired
@@ -28,14 +32,17 @@ public class CallbackController {
 		parts.add("client_secret", clientSecret);
 		parts.add("code", code);
 //		parts.add("redirect_uri", "/callback");
-		String response = template.postForObject("https://api.bondora.com/oauth/access_token", parts, String.class);
+		
+		
+		String response = template.postForObject(tokenUri, parts, String.class);
 		
 		ModelAndView mav = new ModelAndView("callback");
-		mav.addObject("code", code);
-		mav.addObject("client_id", org.thymeleaf.util.StringUtils.substring(clientId, 0, 5));
-		mav.addObject("client_secret", org.thymeleaf.util.StringUtils.substring(clientSecret, 0, 5));
-		mav.addObject("response", response);
+		mav.addObject("code", substring(code, 0, 5));
+		mav.addObject("client_id", substring(clientId, 0, 5));
+		mav.addObject("client_secret", substring(clientSecret, 0, 5));
+		mav.addObject("tokenUri", substring(tokenUri, 0, 5));
 		mav.addObject("token", token);
+		mav.addObject("response", response);
 		return mav;
 	}
 	
