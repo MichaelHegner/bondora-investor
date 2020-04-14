@@ -1,11 +1,11 @@
-package net.hemisoft.investor.bondora.auth.dto;
+package net.hemisoft.investor.bondora.web.session;
 
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @ToString
-public class AuthResponseDto {
+public class AccessToken {
 	String access_token;
 	String scope;
 	String token_type;
