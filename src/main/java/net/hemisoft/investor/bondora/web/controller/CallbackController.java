@@ -1,5 +1,7 @@
 package net.hemisoft.investor.bondora.web.controller;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -48,7 +50,12 @@ public class CallbackController {
 		mav.addObject("token", token);
 		mav.addObject("principal", principal);
 		mav.addObject("response", response);
-		mav.addObject("registration", repository.findByRegistrationId(code));
+		mav.addObject("registration", Arrays.asList(
+				repository.findByRegistrationId(code),
+				repository.findByRegistrationId(clientId),
+				repository.findByRegistrationId(response.getAccess_token()),
+				repository.findByRegistrationId(response.getRefresh_token())
+				));
 		return mav;
 	}
 
