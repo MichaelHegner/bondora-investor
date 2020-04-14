@@ -42,7 +42,7 @@ public class CallbackController {
 		mav.addObject("code", code);
 		mav.addObject("client_id", clientId);
 		mav.addObject("client_secret", clientSecret);
-		mav.addObject("tokenUri", tokenUri);
+//		mav.addObject("tokenUri", tokenUri);
 		mav.addObject("token", token);
 		mav.addObject("principal", principal);
 //		mav.addObject("response", response);
