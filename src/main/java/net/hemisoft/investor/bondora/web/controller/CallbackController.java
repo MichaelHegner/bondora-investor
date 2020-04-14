@@ -31,8 +31,6 @@ public class CallbackController {
 		parts.add("client_id", clientId);
 		parts.add("client_secret", clientSecret);
 		parts.add("code", code);
-		parts.add("redirect_uri", "/callback2");
-		
 		
 		String response = template.postForObject(tokenUri, parts, String.class);
 		
@@ -43,18 +41,6 @@ public class CallbackController {
 		mav.addObject("tokenUri", substring(tokenUri, 0, 5));
 		mav.addObject("token", token);
 		mav.addObject("response", response);
-		return mav;
-	}
-
-	@GetMapping("/callback2")
-	public ModelAndView get2(String code, OAuth2AuthenticationToken token) {
-		ModelAndView mav = new ModelAndView("callback");
-		mav.addObject("code", code);
-		mav.addObject("client_id", substring(clientId, 0, 5));
-		mav.addObject("client_secret", substring(clientSecret, 0, 5));
-		mav.addObject("tokenUri", substring(tokenUri, 0, 5));
-		mav.addObject("token", token);
-		mav.addObject("response", "test");
 		return mav;
 	}
 
