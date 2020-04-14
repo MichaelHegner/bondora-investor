@@ -1,4 +1,4 @@
-package net.hemisoft.investor.bondora.auth.dto;
+package net.hemisoft.investor.bondora.auth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

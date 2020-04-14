@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.hemisoft.investor.bondora.auth.dto.AuthResponseDto;
+
 @Controller
 public class CallbackController {
 	
@@ -36,7 +38,7 @@ public class CallbackController {
 		parts.add("client_secret", clientSecret);
 		parts.add("code", code);
 		
-		String response = template.postForObject(tokenUri, parts, String.class);
+		AuthResponseDto response = template.postForObject(tokenUri, parts, AuthResponseDto.class);
 		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
