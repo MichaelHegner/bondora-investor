@@ -32,8 +32,8 @@ public class CallbackController {
 		
 		ModelAndView mav = new ModelAndView("callback");
 		mav.addObject("code", code);
-		mav.addObject("client-id", org.thymeleaf.util.StringUtils.substring(clientId, 0, 5));
-		mav.addObject("client-secret", org.thymeleaf.util.StringUtils.substring(clientSecret, 0, 5));
+		mav.addObject("client_id", org.thymeleaf.util.StringUtils.substring(clientId, 0, 5));
+		mav.addObject("client_secret", org.thymeleaf.util.StringUtils.substring(clientSecret, 0, 5));
 		mav.addObject("response", response);
 		mav.addObject("token", token);
 		return mav;
